@@ -1,65 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  Alert,
-  TextInput,
-} from 'react-native';
+import { AppRegistry, StyleSheet } from 'react-native';
+import { Todo } from './src/app/Todo';
 
-export default class iosApp extends Component {
-  state = {
-    seeMethods: false,
-    text: 'placeholder text'
-  }
-  onButtonPress() {
-    this.setState({
-      seeMethods: !this.state.seeMethods
-    });
-  }
+class Main extends Component {
   render() {
-    let methods;
-    if (this.state.seeMethods) {
-      methods =(
-        <View>
-          <Text>Chemex</Text>
-          <Text>Kalita</Text>
-          <Text>V60</Text>
-          <Text>French Press</Text>
-        </View>
-      )
-    }
     return (
-      <View style={styles.container}>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(text) => {this.setState({text})}}
-          value={this.state.text}
-        />
-        <Text style={styles.welcome}>
-          Here is an app
-        </Text>
-        <Text style={styles.instructions}>
-          It says things
-        </Text>
-        <Text style={styles.instructions}>
-          But does nothing
-        </Text>
-        <Button
-         onPress={this.onButtonPress.bind(this)}
-         title="Press Me"
-         accessibilityLabel="See an informative alert"
-       />
-       {methods}
-      </View>
+      <Todo />
     );
   }
 }
@@ -69,7 +15,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#de45ca',
+    backgroundColor: '#F5FCFF',
   },
   welcome: {
     fontSize: 20,
@@ -78,9 +24,9 @@ const styles = StyleSheet.create({
   },
   instructions: {
     textAlign: 'center',
-    color: '#fff',
+    color: '#333333',
     marginBottom: 5,
   },
 });
 
-AppRegistry.registerComponent('iosApp', () => iosApp);
+AppRegistry.registerComponent('Todo', () => Main);
