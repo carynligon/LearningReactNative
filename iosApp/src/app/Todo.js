@@ -3,18 +3,18 @@ import {
   View,
   Text,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  StyleSheet
 } from 'react-native';
 
 export class Todo extends Component {
   constructor() {
     super();
     this.state = {
-      todos: [],
+      todos: ['something','something again'],
       newTodo: ''
     }
 
-    throw new Error('yooo')
   }
 
   handleChange(text) {
@@ -28,15 +28,16 @@ export class Todo extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <TextInput
+          style={styles.textBox}
           value={this.state.newTodo}
           onChangeText={this.handleChange.bind(this)}
         />
-        <TouchableOpacity onPress={this.handlePress.bind(this)}>
-          <Text>make</Text>
+        <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
+          <Text>add</Text>
         </TouchableOpacity>
-        <View>
+        <View style={styles.viewStyles}>
           {this.state.todos.map((todo, i) => (
             <Text key={i}>{todo}</Text>
           ))}
@@ -45,3 +46,28 @@ export class Todo extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  textBox: {
+    backgroundColor: '#FFF',
+    height: 30,
+    margin: 15,
+    padding: 5,
+    textAlign: 'center'
+  },
+  button: {
+    backgroundColor: '#34edcc',
+    marginTop: 5,
+    padding: 5
+  },
+  viewStyles: {
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  }
+});

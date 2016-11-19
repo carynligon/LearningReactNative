@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet } from 'react-native';
 import { Todo } from './src/app/Todo';
 
-class Main extends Component {
-  render() {
-    return (
-      <Todo />
-    );
-  }
-}
+const Main = () => (<Todo style={styles}/>);
 
 const styles = StyleSheet.create({
   container: {
@@ -29,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('Todo', () => Main);
+AppRegistry.registerComponent('iosApp', () => Main);
