@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import React, { Component } from 'react';
 import {
   View,
@@ -12,36 +13,102 @@ export class Todo extends Component {
     super();
     this.state = {
       todos: ['something','something again'],
+      email: '',
+      name: '',
+      username: '',
+      password: '',
       newTodo: ''
     }
 
   }
 
-  handleChange(text) {
-    this.setState({newTodo: text});
+  handleEmail(text) {
+    this.setState({email: text});
+  }
+
+  handleName(text) {
+    this.setState({name: text});
+  }
+
+  handleUsername(text) {
+    this.setState({username: text});
+  }
+
+  handlePassword(text) {
+    this.setState({password: text});
   }
 
   handlePress() {
     const todos = [...this.state.todos, this.state.newTodo];
-    this.setState({todos, newTodo: ''});
+    this.setState({
+      email: '',
+      name: '',
+      username: '',
+      password: '',
+    });
+    fetch('https://api.backendless.com/v1/users/register', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'application-id': '7E91E4C7-28A3-DDB4-FFDD-0D627754FD00',
+  			'secret-key': 'FDAE28E3-874B-FF1A-FF3A-207B2F4BE000',
+  			'application-type': 'REST'
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        name: this.state.name,
+        username: this.state.username,
+        password: this.state.password
+      })
+    })
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <Text>email</Text>
         <TextInput
+          className="email"
+          ref="email"
           style={styles.textBox}
-          value={this.state.newTodo}
-          onChangeText={this.handleChange.bind(this)}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          accessibilityLabel="email"
+          onChangeText={this.handleEmail.bind(this)}
+        />
+        <Text>name</Text>
+        <TextInput
+          className="name"
+          ref="name"
+          style={styles.textBox}
+          autoCapitalize="words"
+          autoCorrect={false}
+          accessibilityLabel="name"
+          onChangeText={this.handleName.bind(this)}
+        />
+        <Text>username</Text>
+        <TextInput
+          className="username"
+          ref="username"
+          style={styles.textBox}
+          autoCapitalize="none"
+          autoCorrect={false}
+          accessibilityLabel="username"
+          onChangeText={this.handleUsername.bind(this)}
+        />
+        <Text>password</Text>
+        <TextInput
+          className="password"
+          ref="password"
+          style={styles.textBox}
+          secureTextEntry={true}
+          accessibilityLabel="password"
+          onChangeText={this.handlePassword.bind(this)}
         />
         <TouchableOpacity style={styles.button} onPress={this.handlePress.bind(this)}>
           <Text>add</Text>
         </TouchableOpacity>
-        <View style={styles.viewStyles}>
-          {this.state.todos.map((todo, i) => (
-            <Text key={i}>{todo}</Text>
-          ))}
-        </View>
       </View>
     )
   }
