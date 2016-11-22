@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet } from 'react-native';
+import { AppRegistry, StyleSheet, View } from 'react-native';
 import { Todo } from './src/app/Todo';
+import TabView from 'react-native-scrollable-tab-view';
 
-const Main = () => (<Todo/>);
+const Main = () => (
+  <TabView>
+    <Todo tabLabel="signup"/>
+    <View tabLabel="other"></View>
+  </TabView>
+);
 
 const styles = StyleSheet.create({
   container: {

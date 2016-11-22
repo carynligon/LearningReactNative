@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 export class Todo extends Component {
   constructor() {
@@ -61,10 +62,12 @@ export class Todo extends Component {
         username: this.state.username,
         password: this.state.password
       })
-    })
+    });
+    Actions.newPage();
   }
 
   render() {
+    console.warn(this.state)
     return (
       <View style={styles.container}>
         <Text>email</Text>
