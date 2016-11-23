@@ -5,9 +5,10 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
+  NavigatorIOS
 } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import NewPage from './NewPage';
 
 export class Todo extends Component {
   constructor() {
@@ -47,27 +48,34 @@ export class Todo extends Component {
       username: '',
       password: '',
     });
-    fetch('https://api.backendless.com/v1/users/register', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'application-id': '7E91E4C7-28A3-DDB4-FFDD-0D627754FD00',
-  			'secret-key': 'FDAE28E3-874B-FF1A-FF3A-207B2F4BE000',
-  			'application-type': 'REST'
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        name: this.state.name,
-        username: this.state.username,
-        password: this.state.password
-      })
+    // fetch('https://api.backendless.com/v1/users/register', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //     'application-id': '7E91E4C7-28A3-DDB4-FFDD-0D627754FD00',
+  	// 		'secret-key': 'FDAE28E3-874B-FF1A-FF3A-207B2F4BE000',
+  	// 		'application-type': 'REST'
+    //   },
+    //   body: JSON.stringify({
+    //     email: this.state.email,
+    //     name: this.state.name,
+    //     username: this.state.username,
+    //     password: this.state.password
+    //   })
+    // });
+    this.props.toggleNavBar();
+    this.props.navigator.push({
+      title: "Second Page",
+      component: NewPage,
+      passProps: {
+        toggleNavBar: this.props.toggleNavBar,
+      }
     });
-    Actions.newPage();
   }
 
   render() {
-    console.warn(this.state)
+    console.warn(NewPage)
     return (
       <View style={styles.container}>
         <Text>email</Text>

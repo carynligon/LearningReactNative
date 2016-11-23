@@ -1,14 +1,37 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View } from 'react-native';
+import { AppRegistry, StyleSheet, NavigatorIOS } from 'react-native';
 import { Todo } from './src/app/Todo';
-import TabView from 'react-native-scrollable-tab-view';
+import { NewPage } from './src/app/NewPage';
 
-const Main = () => (
-  <TabView>
-    <Todo tabLabel="signup"/>
-    <View tabLabel="other"></View>
-  </TabView>
-);
+const firstRoute = {
+  name: 'Welcome!',
+  component: Todo
+};
+
+const Main = React.createClass({
+  getInitialState() {
+    return {navigationBarHidden: false}
+  },
+
+  toggleNavBar() {
+    this.setState({navigationBarHidden: !this.state.navigationBarHidden});
+  },
+
+  render() {
+    return (
+      <NavigatorIOS
+        initialRoute={{
+          component: Todo,
+          title: 'My Initial Scene',
+          passProps: {
+            toggleNavBar: this.toggleNavBar
+          }
+        }}
+        style={{flex: 1}}
+      />
+    )
+  }
+});
 
 const styles = StyleSheet.create({
   container: {

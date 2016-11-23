@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  NavigatorIOS
 } from 'react-native';
 
-export class Todo extends Component {
+class NewPage extends Component {
   constructor() {
     super();
   }
 
   render() {
     return (
-      <View></View>
+      <View><Text>Hi</Text></View>
     )
   }
 }
@@ -41,3 +42,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   }
 });
+
+export default NewPage;
